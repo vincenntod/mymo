@@ -6,7 +6,7 @@ use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DataMenuController;
 use App\Http\Controllers\DataPesananController;
-use App\Http\Controllers\DataStockController;
+use App\Http\Controllers\DataBarangKeluarController;
 use App\Http\Controllers\DataTransaksiController;
 
 /*
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function () {
     Route::get('/data_menu', [DataMenuController::class, 'index'])->name('data_menu');
     Route::get('/data_pesanan', [DataPesananController::class, 'index'])->name('data_pesanan');
     Route::get('/data_transaksi', [DataTransaksiController::class, 'index'])->name('data_transaksi');
-    Route::get('/data_stock', [DataStockController::class, 'index'])->name('data_stock');
+    Route::get('/data_barang_keluar', [DataBarangKeluarController::class, 'index'])->name('data_barang_keluar');
     //barang
     Route::get('/create_barang', [DataBarangController::class, 'create'])->name('create_barang');
     Route::post('/store_barang', [DataBarangController::class, 'store'])->name('store_barang');
@@ -67,12 +67,14 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function () {
     Route::delete('/delete_transaksi/{id}', [DataTransaksiController::class, 'destroy'])->name('delete_transaksi');
     Route::get('/cetak_transaksi', [DataTransaksiController::class, 'cetak'])->name('cetak_transaksi');
     //stock
-    Route::get('/create_stock', [DataStockController::class, 'create'])->name('create_stock');
-    Route::post('/store_stock', [DataStockController::class, 'store'])->name('store_stock');
-    Route::get('/edit_stock/{id}', [DataStockController::class, 'edit'])->name('edit_stock');
-    Route::put('/update_stock/{id}', [DataStockController::class, 'update'])->name('update_stock');
-    Route::delete('/delete_stock/{id}', [DataStockController::class, 'destroy'])->name('delete_stock');
-    Route::get('/cetak_stock', [DataStockController::class, 'cetak'])->name('cetak_stock');
+    Route::get('/create_data_barang_keluar', [DataBarangKeluarController::class, 'create'])->name('create_data_barang_keluar');
+    Route::post('/store_data_barang_keluar', [DataBarangKeluarController::class, 'store'])->name('store_data_barang_keluar');
+    Route::get('/edit_data_barang_keluar/{id}', [DataBarangKeluarController::class, 'edit'])->name('edit_data_barang_keluar');
+    Route::put('/update_data_barang_keluar/{id}', [DataBarangKeluarController::class, 'update'])->name('update_data_barang_keluar');
+    Route::delete('/delete_data_barang_keluar/{id}', [DataBarangKeluarController::class, 'destroy'])->name('delete_data_barang_keluar');
+    Route::get('/cetak_data_barang_keluar', [DataBarangKeluarController::class, 'cetak'])->name('cetak_data_barang_keluar');
+    //get payment
+    Route::get('/payment/{id}', [DataTransaksiController::class, 'payment'])->name('payment');
 });
 
 // Route::group(['middleware' => ['auth', 'ceklevel:admin,gudang']], function () {

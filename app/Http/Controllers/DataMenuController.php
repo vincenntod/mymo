@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataMenu;
+use App\Models\DataBarang;
+use DB;
 
 class DataMenuController extends Controller
 {
@@ -12,7 +14,24 @@ class DataMenuController extends Controller
      */
     public function index()
     {
-        $datamenu = DataMenu::all();
+        $arr=[];
+        $datamenu = DB::table('data_menu')
+            ->leftJoin('data_barang', 'data_menu.kd_barang', '=', 'data_barang.kd_barang')
+            ->select('data_menu.*', 'data_barang.nama_barang')
+            ->get();
+
+        foreach ($datamenu as $datamenus) {
+            $arr = explode(',',$datamenus->kd_barang);
+            
+            if (is_array($arr)) {
+                $listBarang = DB::table('data_barang')
+                                ->whereIn('kd_barang', $arr)
+                                ->pluck('nama_barang');
+                $datamenus->nama_barang = implode(", ",$listBarang->toArray());
+            } else {
+                $datamenus->nama_barang = [];
+            }
+        }
         return view('Halaman.DataMenu.data_menu', compact('datamenu'));
     }
 
@@ -21,7 +40,8 @@ class DataMenuController extends Controller
      */
     public function create()
     {
-        return view('Halaman.DataMenu.create_menu');
+        $barang = DataBarang::all();
+        return view('Halaman.DataMenu.create_menu', compact('barang'));
     }
 
     /**
@@ -29,14 +49,16 @@ class DataMenuController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kategori' => 'required',
-            'harga' => 'required|numeric',
-            'jumlah' => 'required|integer',
+        $data = $request->validate([
+            'kd_menu' => 'required',
+            'kd_barang' => 'required',
+            'nama_menu' => 'required',
+            'harga' => 'required',
+            'keterangan' => 'required',
         ]);
+        $data['kd_barang'] = implode(',', $data['kd_barang']);
 
-        DataMenu::create($request->all());
+        DataMenu::create($data);
 
         return redirect()->route('data_menu')->with('success', 'Menu berhasil ditambahkan.');
     }
@@ -56,7 +78,8 @@ class DataMenuController extends Controller
     {
 
         $menu = DataMenu::findOrFail($id);
-        return view('Halaman.DataMenu.edit_menu', compact('menu'));
+        $barang = DataBarang::all();
+        return view('Halaman.DataMenu.edit_menu', compact('menu', 'barang'));
     }
 
     /**
@@ -64,14 +87,17 @@ class DataMenuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kategori' => 'required',
-            'harga' => 'required|numeric',
-            'jumlah' => 'required|integer',
+        $data = $request->validate([
+            'kd_menu' => 'required',
+            'kd_barang' => 'required',
+            'nama_menu' => 'required',
+            'harga' => 'required',
+            'keterangan' => 'required',
         ]);
+        $data['kd_barang'] = implode(',', $data['kd_barang']);
+
         $barang = DataMenu::findOrFail($id);
-        $barang->update($request->all());
+        $barang->update($data);
         return redirect()->route('data_menu')->with('success', 'Menu berhasil diperbarui.');
     }
 

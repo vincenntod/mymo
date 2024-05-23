@@ -9,19 +9,9 @@ class DataBarang extends Model
 {
     use HasFactory;
 
-    protected $table = 'databarang';
+    protected $table = 'data_barang';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama', 'jumlah', 'harga', 'stok_barang'
+        'kd_barang', 'nama_barang', 'stock'
     ];
-    public function setHargaAttribute($value)
-    {
-        $this->attributes['harga'] = str_replace(',', '', $value);
-    }
-
-    // Accessor untuk mengubah format harga saat diambil
-    public function getHargaAttribute($value)
-    {
-        return number_format($value, 0, ',', '.');
-    }
 }

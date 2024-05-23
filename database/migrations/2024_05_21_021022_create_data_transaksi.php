@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang');
-            $table->date('tanggal_penjualan');
-            $table->integer('jumlah');
-            $table->string('keterangan');
+            $table->integer('id_pesanan');
+            $table->string('total_harga');
+            $table->date('tanggal_pembayaran')->nullable();
             $table->timestamps();
         });
     }

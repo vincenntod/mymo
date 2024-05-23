@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Data Barang</h1>
+                            <h1 class="m-0">Stock Barang</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -41,10 +41,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nama</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga</th>
+                                    <th>Kode Barang</th>
+                                    <th>Nama Barang</th>
                                     <th>Stock Barang</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -52,11 +50,9 @@
                             <tbody>
                                 @foreach ($databarang as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->harga }}</td>
-                                        <td>{{ $item->stok_barang }}</td>
+                                        <td>{{ $item->kd_barang }}</td>
+                                        <td>{{ $item->nama_barang }}</td>
+                                        <td>{{ $item->stock }}</td>
                                         <td>
                                             <a href="{{ route('edit_barang', ['id' => $item->id]) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>

@@ -34,29 +34,36 @@
             <div class="content">
                 <div class="card card-info card-outline">
                     <div class="card-body">
-                        <form action="{{ route('update_barang', ['id' => $barang->id]) }}" method="post">
+                        <form action="{{ route('update_barang',['id' => $barang->id]) }}" method="post">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="nama">Nama Barang</label>
-                                <input type="text" name="nama" id="nama" class="form-control"
-                                    value="{{ $barang->nama }}" required>
+                                <label for="kd_barang">Kode Barang</label>
+                                <input type="text" name="kd_barang" id="kd_barang" class="form-control" value={{$barang->kd_barang}} required>
+                                @if ($errors->has('kd_barang'))
+                                    <div class="error">{{ $errors->first('kd_barang') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input type="number" name="jumlah" id="jumlah" class="form-control"
-                                    value="{{ $barang->jumlah }}" required>
+                                <label for="nama_barang">Nama Barang</label>
+                                <input type="text" name="nama_barang" id="nama_barang" class="form-control" value={{$barang->nama_barang}} required>
+                                @if ($errors->has('nama_barang'))
+                                    <div class="error">{{ $errors->first('nama_barang') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" name="harga" id="harga" class="form-control"
-                                    value="{{ $barang->harga }}" required>
+                                <label for="stock">Jumlah Stock</label>
+                                <input type="number" name="stock" id="stock" class="form-control" value={{$barang->stock}} required>
+                                @if ($errors->has('stock'))
+                                    <div class="error">{{ $errors->first('stock') }}</div>
+                                @endif
                             </div>
-                            <div class="form-group">
-                                <label for="stok_barang">Stock Barang</label>
-                                <input type="number" name="stok_barang" id="stok_barang" class="form-control" value="{{ $barang->stok_barang }}" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <!-- Tambah field keterangan jika diperlukan -->
+                            <!-- <div class="form-group">
+                                <label for="keterangan">Keterangan</label>
+                                <textarea name="keterangan" id="keterangan" class="form-control"></textarea>
+                            </div> -->
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </form>
                     </div>
                 </div>

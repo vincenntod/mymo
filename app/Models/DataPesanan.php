@@ -12,7 +12,7 @@ class DataPesanan extends Model
     protected $table = 'pesanan_pelanggan';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'kd_pelanggan', 'tanggal', 'nama_pelanggan', 'nama_pesanan', 'jumlah', 'keterangan'
+        'nama_pelanggan', 'kd_menu', 'status_order'
     ];
 
     public function setHargaAttribute($value)

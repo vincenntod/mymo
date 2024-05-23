@@ -35,30 +35,31 @@
                 <div class="card card-info card-outline">
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('create_transaksi') }}" class="btn btn-primary">Tambah transaksi</a>
+                            {{-- <a href="{{ route('create_transaksi') }}" class="btn btn-primary">Tambah transaksi</a> --}}
                             {{-- <a href="{{ route('cetak_barang') }}" class="btn btn-success">Cetak</a> --}}
                         </div>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nama Barang</th>
-                                    <th>Tanggal</th>
-                                    <th>Jumlah</th>
-                                    <th>Keterangan</th>
-                                    <th>Aksi</th>
+                                    <th>Nomor Pesanan</th>
+                                    <th>Nama Pelanggan</th>
+                                    <th>Menu</th>
+                                    <th>Total Harga</th>
+                                    <th>Tanggal Pembayaran</th>
+                                    {{-- <th>Aksi</th> --}}
+                                    <th>Payment</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($dataTransaksi as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->nama_barang }}</td>
-                                        <td>{{ $item->tanggal_penjualan }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->keterangan }}</td>
+                                        <td>{{ $item->nama_pelanggan }}</td>
+                                        <td>{{ $item->nama_menu }}</td>
+                                        <td>{{ $item->total_harga }}</td>
+                                        <td>{{ $item->tanggal_pembayaran }}</td>
 
-                                        <td>
+                                        {{-- <td>
                                             <a href="{{ route('edit_transaksi', ['id' => $item->id]) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
                                             <form action="{{ route('delete_transaksi', ['id' => $item->id]) }}"
@@ -68,6 +69,14 @@
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Delete</button>
                                             </form>
+                                        </td> --}}
+                                        <td>
+                                            @if($item->status_order != 'Paid')
+                                                <a href="{{ route('payment', ['id' => $item->id]) }}"
+                                                class="btn btn-success btn-sm">Bayar</a>
+                                            @else
+                                                Paid
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

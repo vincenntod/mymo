@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DataStock;
+use App\Models\DataBarangKeluar;
+use DB;
 
-class DataStockController extends Controller
+class DataBarangKeluarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $stock = Datastock::all();
-        return view('Halaman.Datastock.data_stock', compact('stock'));
+        $dataBarangKeluar = DB::table('barang_keluar')
+        ->leftjoin('data_barang', 'barang_keluar.kd_barang', '=', 'data_barang.kd_barang')
+        ->select('barang_keluar.*', 'data_barang.nama_barang')
+        ->get();
+        return view('Halaman.DataBarangKeluar.data_barang_keluar', compact('dataBarangKeluar'));
     }
 
     /**
@@ -21,7 +25,7 @@ class DataStockController extends Controller
      */
     public function create()
     {
-        return view('Halaman.Datastock.create_stock');
+        return view('Halaman.DataBarangKeluar.create_data_barang_keluar');
     }
 
     /**
@@ -36,9 +40,9 @@ class DataStockController extends Controller
             'tanggal_keluar' => 'required',
         ]);
 
-        Datastock::create($request->all());
+        DataBarangKeluar::create($request->all());
 
-        return redirect()->route('data_stock')->with('success', 'stock berhasil ditambahkan.');
+        return redirect()->route('data_barang_keluar')->with('success', 'dataBarangKeluar berhasil ditambahkan.');
     }
 
     /**
@@ -55,8 +59,8 @@ class DataStockController extends Controller
     public function edit(string $id)
     {
 
-        $stock = Datastock::findOrFail($id);
-        return view('Halaman.Datastock.edit_stock', compact('stock'));
+        $dataBarangKeluar = DataBarangKeluar::findOrFail($id);
+        return view('Halaman.DataBarangKeluar.edit_data_barang_keluar', compact('dataBarangKeluar'));
     }
 
     /**
@@ -71,9 +75,9 @@ class DataStockController extends Controller
             'tanggal_keluar' => 'required',
         ]);
 
-        $stock = Datastock::findOrFail($id);
-        $stock->update($request->all());
-        return redirect()->route('data_stock')->with('success', 'stock berhasil diperbarui.');
+        $dataBarangKeluar = DataBarangKeluar::findOrFail($id);
+        $dataBarangKeluar->update($request->all());
+        return redirect()->route('data_barang_keluar')->with('success', 'Data Barang Keluar berhasil diperbarui.');
     }
 
     /**
@@ -81,7 +85,7 @@ class DataStockController extends Controller
      */
     public function destroy(string $id)
     {
-        Datastock::findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'stock berhasil dihapus.');
+        DataBarangKeluar::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Data Barang Keluar berhasil dihapus.');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataTransaksi;
+use DB;
 
 class DataTransaksiController extends Controller
 {
@@ -12,7 +13,26 @@ class DataTransaksiController extends Controller
      */
     public function index()
     {
-        $dataTransaksi = DataTransaksi::all();
+        $arr=[];
+        $dataTransaksi = DB::table('pesanan_pelanggan')
+            ->leftJoin('data_menu', 'pesanan_pelanggan.kd_menu', '=', 'data_menu.kd_menu')
+            ->leftJoin('data_transaksi','pesanan_pelanggan.id', '=', 'data_transaksi.id_pesanan')
+            ->select('pesanan_pelanggan.*', 'data_menu.nama_menu', 'data_transaksi.total_harga', 'data_transaksi.tanggal_pembayaran')
+            ->get();
+
+
+        foreach ($dataTransaksi as $dataTransaksis) {
+            $arr = explode(',',$dataTransaksis->kd_menu);
+            
+            if (is_array($arr)) {
+                $listMenu = DB::table('data_menu')
+                                ->whereIn('kd_menu', $arr)
+                                ->pluck('nama_menu');
+                $dataTransaksis->nama_menu = implode(", ",$listMenu->toArray());
+            } else {
+                $dataTransaksis->nama_menu = [];
+            }
+        }
         return view('Halaman.DataTransaksi.data_transaksi', compact('dataTransaksi'));
     }
 
@@ -83,5 +103,15 @@ class DataTransaksiController extends Controller
     {
         DataTransaksi::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'transaksi berhasil dihapus.');
+    }
+    public function payment(string $id){
+        DB::table('data_transaksi')->where('id_pesanan', $id)->update([
+            'tanggal_pembayaran' => date('Y-m-d H:i:s')
+        ]);
+
+         DB::table('pesanan_pelanggan')->where('id', $id)->update([
+            'status_order' => 'Paid'
+        ]);
+        return redirect()->route('data_transaksi')->with('success', 'transaksi berhasil diperbarui.');
     }
 }

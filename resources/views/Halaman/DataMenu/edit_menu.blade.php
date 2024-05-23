@@ -34,29 +34,40 @@
             <div class="content">
                 <div class="card card-info card-outline">
                     <div class="card-body">
-                        <form action="{{ route('update_menu', ['id' => $menu->id]) }}" method="post">
+                        <form action="{{ route('update_menu',['id' => $menu->id]) }}" method="post">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="nama">Nama Menu</label>
-                                <input type="text" name="nama" id="nama" class="form-control" 
-                                value= "{{$menu->nama}}" required>
+                                <label for="kd_menu">Kode Menu</label>
+                                <input type="text" name="kd_menu" id="kd_menu" class="form-control" value={{$menu->kd_menu}} required>
                             </div>
                             <div class="form-group">
-                                <label for="kategori">Kategori</label>
-                                <input type="text" name="kategori" id="kategori" class="form-control" value= {{$menu->kategori}} required>
+                                <label for="kd_barang" class="form-label">List Barang</label>
+                                @foreach($barang as $barangs)
+                                @if(in_array($barangs->kd_barang, explode(',',$menu->kd_barang)))
+                                    <?php $checked = "checked"; ?>
+                                @else 
+                                    <?php $checked = ""?>
+                                @endif
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="kd_barang" name="kd_barang[]"  value="{{$barangs->kd_barang}}" {{$checked}}>
+                                <label class="form-check-label" for="sparepart">
+                                {{$barangs->nama_barang}}
+                                </label>
+                            </div>
+                                @endforeach
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_menu">Nama Menu</label>
+                                <input type="text" name="nama_menu" id="nama_menu" class="form-control" value={{$menu->nama_menu}} required>
                             </div>
                             <div class="form-group">
                                 <label for="harga">Harga</label>
-                                <input type="number" name="harga" id="harga" class="form-control" value= {{$menu->harga}} required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input type="number" name="jumlah" id="jumlah" class="form-control" value= {{$menu->jumlah}} required>
+                                <input type="number" name="harga" id="harga" class="form-control" value={{$menu->harga}} required>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
-                                <input type="text" name="keterangan" id="keterangan" class="form-control" value= {{$menu->keterangan}} required>
+                                <input type="text" name="keterangan" id="keterangan" class="form-control" value={{$menu->keterangan}} required>
                             </div>
                             <!-- Tambah field keterangan jika diperlukan -->
                             <!-- <div class="form-group">

@@ -40,6 +40,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Data Master for Admin and Gudang -->
+                @can('admin')
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-database"></i>
@@ -49,15 +50,6 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @can('admin dan gudang')
-                            <li class="nav-item">
-                                <a href="{{ route('data_barang') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Data Barang</p>
-                                </a>
-                            </li>
-                            @endcan
-                            @can('admin')
                             <li class="nav-item">
                                 <a href="{{ route('data_menu') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -70,24 +62,48 @@
                                     <p>Pesanan Pelanggan</p>
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('admin')
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            <p>
+                                Transaksi Penjualan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('data_transaksi') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Data Transaksi Penjualan</p>
+                                    <p>Transaksi</p>
                                 </a>
                             </li>
-                            @endcan
-                            @can('gudang')
-                            <li class="nav-item">
-                                <a href="{{ route('data_stock') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Data Stock Barang</p>
-                                </a>
-                            </li>
-                            @endcan
                         </ul>
                     </li>
-                    @can('admin dan pemilik')
+                @endcan
+                @can('admin dan gudang')
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            <p>
+                                Gudang
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('data_barang') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Stock Barang</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                @can('admin dan pemilik')
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-database"></i>
@@ -105,7 +121,7 @@
                             </li>
                         </ul>
                     </li>
-                    @endcan
+                @endcan
 
                 <!-- Logout -->
                 <li class="nav-item">

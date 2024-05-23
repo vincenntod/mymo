@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('pesanan_pelanggan', function (Blueprint $table) {
             $table->id();
-            $table->integer('kd_pelanggan');
-            $table->date('tanggal');
             $table->string('nama_pelanggan');
-            $table->string('nama_pesanan');
-            $table->integer('jumlah');
-            $table->string('keterangan');
+            $table->string('kd_menu');
+            $table->string('status_order');
             $table->timestamps();
         });
     }

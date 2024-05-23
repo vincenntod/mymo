@@ -18,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Data Stock</h1>
+                            <h1 class="m-0">Data Barang Keluar</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -35,7 +35,7 @@
                 <div class="card card-info card-outline">
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('create_stock') }}" class="btn btn-primary">Tambah Stock</a>
+                            {{-- <a href="{{ route('create_data_barang_keluar') }}" class="btn btn-primary">Tambah Stock</a> --}}
                             {{-- <a href="{{ route('cetak_barang') }}" class="btn btn-success">Cetak</a> --}}
                         </div>
                         <table class="table table-bordered">
@@ -43,30 +43,15 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nama Barang</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Aksi</th>
+                                    <th>Tanggal Keluar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stock as $item)
+                                @foreach ($dataBarangKeluar as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->kd_barang }}</td>
                                         <td>{{ $item->nama_barang }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->tanggal_masuk }}</td>
                                         <td>{{ $item->tanggal_keluar }}</td>
-                                        <td>
-                                            <a href="{{ route('edit_stock', ['id' => $item->id]) }}"
-                                                class="btn btn-primary btn-sm">Edit</a>
-                                            <form action="{{ route('delete_stock', ['id' => $item->id]) }}"
-                                                method="post" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Delete</button>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

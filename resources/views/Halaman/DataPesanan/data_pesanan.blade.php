@@ -41,27 +41,18 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Kd Pelanggan</th>
-                                    <th>Tanggal</th>
                                     <th>Nama Pelanggan</th>
-                                    <th>Nama Pesanan</th>
-                                    <th>Jumlah</th>
-                                    <th>Keterangan</th>
+                                    <th>Nama Menu</th>
+                                    <th>Status Order</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($dataPesanan as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->kd_pelanggan }}</td>
-                                        <td>{{ $item->tanggal }}</td>
                                         <td>{{ $item->nama_pelanggan }}</td>
-                                        <td>{{ $item->nama_pesanan }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->keterangan }}</td>
-
+                                        <td>{{ $item->nama_menu }}</td>
+                                        <td>{{ $item->status_order }}</td>
                                         <td>
                                             <a href="{{ route('edit_pesanan', ['id' => $item->id]) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
@@ -73,6 +64,7 @@
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">Delete</button>
                                             </form>
                                         </td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>

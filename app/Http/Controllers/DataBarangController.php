@@ -29,12 +29,10 @@ class DataBarangController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required',
-            'jumlah' => 'required|integer',
-            'harga' => 'required|numeric',
-            'stok_barang' => 'required',
+            'kd_barang' => 'required',
+            'nama_barang' => 'required',
+            'stock' => 'required',
         ]);
-
         
         DataBarang::create($data);
 
@@ -64,10 +62,9 @@ class DataBarangController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'jumlah' => 'required|integer',
-            'harga' => 'required|numeric',
-            'stok_barang' => 'required',
+            'kd_barang' => 'required',
+            'nama_barang' => 'required',
+            'stock' => 'required',
         ]);
 
         $barang = DataBarang::findOrFail($id);

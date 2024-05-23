@@ -12,7 +12,7 @@ class DataMenu extends Model
     protected $table = 'data_menu';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama', 'kategori', 'harga', 'jumlah', 'keterangan'
+        'kd_menu', 'kd_barang', 'nama_menu', 'harga', 'keterangan'
     ];
 
     public function setHargaAttribute($value)

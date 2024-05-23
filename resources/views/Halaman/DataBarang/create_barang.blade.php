@@ -37,31 +37,24 @@
                         <form action="{{ route('store_barang') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="nama">Nama Barang</label>
-                                <input type="text" name="nama" id="nama" class="form-control" required>
-                                @if ($errors->has('nama'))
-                                    <div class="error">{{ $errors->first('nama') }}</div>
+                                <label for="kd_barang">Kode Barang</label>
+                                <input type="text" name="kd_barang" id="kd_barang" class="form-control" required>
+                                @if ($errors->has('kd_barang'))
+                                    <div class="error">{{ $errors->first('kd_barang') }}</div>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input type="number" name="jumlah" id="jumlah" class="form-control" required>
-                                @if ($errors->has('jumlah'))
-                                    <div class="error">{{ $errors->first('jumlah') }}</div>
+                                <label for="nama_barang">Nama Barang</label>
+                                <input type="text" name="nama_barang" id="nama_barang" class="form-control" required>
+                                @if ($errors->has('nama_barang'))
+                                    <div class="error">{{ $errors->first('nama_barang') }}</div>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="harga">Harga</label>
-                                <input type="number" name="harga" id="harga" class="form-control" required>
-                                @if ($errors->has('harga'))
-                                    <div class="error">{{ $errors->first('harga') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label for="stok_barang">Stock Barang</label>
-                                <input type="number" name="stok_barang" id="stok_barang" class="form-control" required>
-                                @if ($errors->has('stok_barang'))
-                                    <div class="error">{{ $errors->first('stok_barang') }}</div>
+                                <label for="stock">Jumlah Stock</label>
+                                <input type="number" name="stock" id="stock" class="form-control" required>
+                                @if ($errors->has('stock'))
+                                    <div class="error">{{ $errors->first('stock') }}</div>
                                 @endif
                             </div>
                             <!-- Tambah field keterangan jika diperlukan -->

@@ -4,7 +4,6 @@
 <head>
     @include('Template.header')
 </head>
-
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
@@ -35,17 +34,16 @@
                 <div class="card card-info card-outline">
                     <div class="card-body">
                         <div class="mb-3">
-                            <a href="{{ route('create_menu') }}" class="btn btn-primary">Tambah Barang</a>
+                            <a href="{{ route('create_menu') }}" class="btn btn-primary">Tambah Menu</a>
                             {{-- <a href="{{ route('cetak_barang') }}" class="btn btn-success">Cetak</a> --}}
                         </div>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
+                                    <th>Kode Menu</th>
+                                    <th>Nama Menu</th>
+                                    <th>List Barang</th>
                                     <th>Harga</th>
-                                    <th>Jumlah</th>
                                     <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -53,11 +51,10 @@
                             <tbody>
                                 @foreach ($datamenu as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->kategori }}</td>
+                                        <td>{{ $item->kd_menu }}</td>
+                                        <td>{{ $item->nama_menu }}</td>
+                                        <td>{{ $item->nama_barang }}</td>
                                         <td>{{ $item->harga }}</td>
-                                        <td>{{ $item->jumlah }}</td>
                                         <td>{{ $item->keterangan }}</td>
                                         <td>
                                             <a href="{{ route('edit_menu', ['id' => $item->id]) }}"

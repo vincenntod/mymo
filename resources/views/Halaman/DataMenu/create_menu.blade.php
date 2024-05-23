@@ -37,20 +37,27 @@
                         <form action="{{ route('store_menu') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="nama">Nama Menu</label>
-                                <input type="text" name="nama" id="nama" class="form-control" required>
+                                <label for="kd_menu">Kode Menu</label>
+                                <input type="text" name="kd_menu" id="kd_menu" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="kategori">Kategori</label>
-                                <input type="text" name="kategori" id="kategori" class="form-control" required>
+                                <label for="kd_barang" class="form-label">List Barang</label>
+                                @foreach($barang as $barangs)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="kd_barang" name="kd_barang[]" value="{{$barangs->kd_barang}}">
+                                        <label class="form-check-label" for="kd_barang">
+                                            [{{$barangs->kd_barang}}] - {{$barangs->nama_barang}} 
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_menu">Nama Menu</label>
+                                <input type="text" name="nama_menu" id="nama_menu" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="harga">Harga</label>
                                 <input type="number" name="harga" id="harga" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah">Jumlah</label>
-                                <input type="number" name="jumlah" id="jumlah" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>

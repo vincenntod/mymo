@@ -12,6 +12,6 @@ class DataTransaksi extends Model
     protected $table = 'data_transaksi';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_barang', 'tanggal_penjualan', 'jumlah', 'keterangan'
+        'id_pesanan', 'total_harga', 'tanggal_pembayaran'
     ];
 }
