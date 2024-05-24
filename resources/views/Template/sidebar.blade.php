@@ -114,9 +114,41 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('laporan_menu')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Laporan</p>
+                                    <p>Laporan Menu</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('laporan_pesanan')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Laporan Pesanan</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('laporan_stock')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Laporan Stock</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('laporan_transaksi')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Laporan Transaksi</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('laporan_barang_keluar')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Laporan Barang Keluar</p>
                                 </a>
                             </li>
                         </ul>

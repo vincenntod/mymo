@@ -8,6 +8,8 @@ use App\Http\Controllers\DataMenuController;
 use App\Http\Controllers\DataPesananController;
 use App\Http\Controllers\DataBarangKeluarController;
 use App\Http\Controllers\DataTransaksiController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\GeneratePdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +77,20 @@ Route::group(['middleware' => ['auth', 'ceklevel']], function () {
     Route::get('/cetak_data_barang_keluar', [DataBarangKeluarController::class, 'cetak'])->name('cetak_data_barang_keluar');
     //get payment
     Route::get('/payment/{id}', [DataTransaksiController::class, 'payment'])->name('payment');
+    //laporan view
+    Route::get('/laporan_menu', [LaporanController::class, 'laporanMenu'])->name('laporan_menu');
+    Route::get('/laporan_pesanan', [LaporanController::class, 'laporanPesanan'])->name('laporan_pesanan');
+    Route::get('/laporan_stock', [LaporanController::class, 'laporanStock'])->name('laporan_stock');
+    Route::get('/laporan_transaksi', [LaporanController::class, 'laporanTransaksi'])->name('laporan_transaksi');
+    Route::get('/laporan_barang_keluar', [LaporanController::class, 'laporanBarangKeluar'])->name('laporan_barang_keluar');
+    //generate pdf
+    Route::get('/pdf_laporan_menu', [GeneratePdfController::class, 'pdflaporanMenu'])->name('pdf_laporan_menu');
+    Route::get('/pdf_laporan_pesanan', [GeneratePdfController::class, 'pdflaporanPesanan'])->name('pdf_laporan_pesanan');
+    Route::get('/pdf_laporan_stock', [GeneratePdfController::class, 'pdflaporanStock'])->name('pdf_laporan_stock');
+    Route::get('/pdf_laporan_transaksi', [GeneratePdfController::class, 'pdflaporanTransaksi'])->name('pdf_laporan_transaksi');
+    Route::get('/pdf_laporan_barang_keluar', [GeneratePdfController::class, 'pdflaporanBarangKeluar'])->name('pdf_laporan_barang_keluar');
+
+    
 });
 
 // Route::group(['middleware' => ['auth', 'ceklevel:admin,gudang']], function () {
